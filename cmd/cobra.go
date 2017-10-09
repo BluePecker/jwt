@@ -47,27 +47,9 @@ Run '{{.CommandPath}} COMMAND --help' for more information on a command.{{end}}
 `
 }
 
-func helpCommand() *cobra.Command {
-	return &cobra.Command{
-		Use:   "help [command]",
-		Short: "Help about the command",
-		PersistentPreRun: func(cmd *cobra.Command, args []string) {
-			// todo
-		},
-		PersistentPostRun: func(cmd *cobra.Command, args []string) {
-			// todo
-		},
-		RunE: func(c *cobra.Command, args []string) error {
-			cmd, args, e := c.Root().Find(args)
-			if cmd == nil || e != nil || len(args) > 0 {
-				return fmt.Errorf("unknown help topic: %v", strings.Join(args, " "))
-			}
-
-			cmd.HelpFunc()(cmd, args)
-			return nil
-		},
-	}
-}
+//func helpCommand() *cobra.Command {
+//	return
+//}
 
 func helpTemplate() string {
 	return "\n{{if or .Runnable .HasSubCommands}}{{.UsageString}}{{end}}"
@@ -88,9 +70,27 @@ func FlagErrorFunc(cmd *cobra.Command, err error) error {
 func SetupRootCommand(cmd *cobra.Command) {
 	//cmd.SetUsageTemplate(usageTemplate())
 	//cmd.SetHelpTemplate(helpTemplate())
-	//cmd.SetHelpCommand(helpCommand())
+	cmd.SetHelpCommand(&cobra.Command{
+		Use:   "help [command]",
+		Short: "Help about the command",
+		PersistentPreRun: func(cmd *cobra.Command, args []string) {
+			// todo
+		},
+		PersistentPostRun: func(cmd *cobra.Command, args []string) {
+			// todo
+		},
+		RunE: func(c *cobra.Command, args []string) error {
+			cmd, args, e := c.Root().Find(args)
+			if cmd == nil || e != nil || len(args) > 0 {
+				return fmt.Errorf("unknown help topic: %v", strings.Join(args, " "))
+			}
+
+			cmd.HelpFunc()(cmd, args)
+			return nil
+		},
+	})
 	//cmd.SetFlagErrorFunc(FlagErrorFunc)
 
-	cmd.PersistentFlags().BoolP("help", "h", false, "print usage")
-	cmd.PersistentFlags().MarkShorthandDeprecated("help", "please use --help")
+	//cmd.PersistentFlags().BoolP("help", "h", false, "print usage")
+	//cmd.PersistentFlags().MarkShorthandDeprecated("help", "please use --help")
 }
