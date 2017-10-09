@@ -7,7 +7,7 @@ import (
 )
 
 func usageTemplate() string {
-		return `Usage:{{if .Runnable}}{{if .HasAvailableFlags}}
+	return `Usage:{{if .Runnable}}{{if .HasAvailableFlags}}
   {{appendIfNotPresent .UseLine "[OPTIONS] COMMAND [arg...]"}}{{else}}{{.UseLine}}{{end}}{{end}}{{if .HasAvailableSubCommands}}
   {{ .CommandPath}} [command]
   {{end}}{{if gt .Aliases 0}}
@@ -27,24 +27,24 @@ Additional help topics:{{range .Commands}}{{if .IsHelpCommand}}
   {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}{{ if .HasAvailableSubCommands }}
 Use "{{.CommandPath}} [command] --help" for more information about a command.{{end}}
 `
-//	return `Usage:	{{if not .HasSubCommands}}{{.UseLine}}{{end}}{{if .HasSubCommands}}{{ .CommandPath}} COMMAND{{end}}
-//
-//{{ .Short | trim }}{{if gt .Aliases 0}}
-//
-//Aliases:
-//  {{.NameAndAliases}}{{end}}{{if .HasExample}}
-//
-//Examples:
-//{{ .Example }}{{end}}{{if .HasFlags}}
-//
-//Options:
-//{{.Flags.FlagUsages | trimRightSpace}}{{end}}{{ if .HasAvailableSubCommands}}
-//
-//Commands:{{range .Commands}}{{if .IsAvailableCommand}}
-//  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{ if .HasSubCommands }}
-//
-//Run '{{.CommandPath}} COMMAND --help' for more information on a command.{{end}}
-//`
+	//	return `Usage:	{{if not .HasSubCommands}}{{.UseLine}}{{end}}{{if .HasSubCommands}}{{ .CommandPath}} COMMAND{{end}}
+	//
+	//{{ .Short | trim }}{{if gt .Aliases 0}}
+	//
+	//Aliases:
+	//  {{.NameAndAliases}}{{end}}{{if .HasExample}}
+	//
+	//Examples:
+	//{{ .Example }}{{end}}{{if .HasFlags}}
+	//
+	//Options:
+	//{{.Flags.FlagUsages | trimRightSpace}}{{end}}{{ if .HasAvailableSubCommands}}
+	//
+	//Commands:{{range .Commands}}{{if .IsAvailableCommand}}
+	//  {{rpad .Name .NamePadding }} {{.Short}}{{end}}{{end}}{{end}}{{ if .HasSubCommands }}
+	//
+	//Run '{{.CommandPath}} COMMAND --help' for more information on a command.{{end}}
+	//`
 }
 
 //func helpCommand() *cobra.Command {
@@ -80,11 +80,10 @@ func SetupRootCommand(cmd *cobra.Command) {
 			// todo
 		},
 		RunE: func(c *cobra.Command, args []string) error {
-			cmd, args, e := c.Root().Find(args)
-			if cmd == nil || e != nil || len(args) > 0 {
+			cmd, args, err := c.Root().Find(args)
+			if cmd == nil || err != nil || len(args) > 0 {
 				return fmt.Errorf("unknown help topic: %v", strings.Join(args, " "))
 			}
-
 			cmd.HelpFunc()(cmd, args)
 			return nil
 		},
