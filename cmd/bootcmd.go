@@ -9,5 +9,5 @@ var RootCmd *cobra.Command = &cobra.Command{
 }
 
 func init() {
-
+	SetupRootCommand(RootCmd)
 }
