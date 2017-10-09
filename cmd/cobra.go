@@ -27,7 +27,7 @@ func usageTemplate() string {
 //  {{rpad .CommandPath .CommandPathPadding}} {{.Short}}{{end}}{{end}}{{end}}{{ if .HasAvailableSubCommands }}
 //Use "{{.CommandPath}} [command] --help" for more information about a command.{{end}}
 //`
-	return `Usage:	{{if not .HasSubCommands}}{{.UseLine}} "[OPTIONS] COMMAND [arg...]"{{end}}{{if .HasSubCommands}}{{ .CommandPath}} COMMAND{{end}}
+	return `Usage:	{{if not .HasSubCommands}}{{.Use}} [OPTIONS] COMMAND [arg...]{{end}}{{if .HasSubCommands}}{{ .CommandPath}} COMMAND{{end}}
 
 {{ .Short | trim }}{{if gt .Aliases 0}}
 
@@ -46,10 +46,6 @@ Commands:{{range .Commands}}{{if .IsAvailableCommand}}
 Run '{{.CommandPath}} COMMAND --help' for more information on a command.{{end}}
 `
 }
-
-//func helpCommand() *cobra.Command {
-//	return
-//}
 
 func helpTemplate() string {
 	return "\n{{if or .Runnable .HasSubCommands}}{{.UsageString}}{{end}}"
