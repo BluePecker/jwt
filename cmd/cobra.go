@@ -86,10 +86,10 @@ func FlagErrorFunc(cmd *cobra.Command, err error) error {
 }
 
 func SetupRootCommand(cmd *cobra.Command) {
-	cmd.SetUsageTemplate(usageTemplate())
-	cmd.SetHelpTemplate(helpTemplate())
-	cmd.SetHelpCommand(helpCommand())
-	cmd.SetFlagErrorFunc(FlagErrorFunc)
+	//cmd.SetUsageTemplate(usageTemplate())
+	//cmd.SetHelpTemplate(helpTemplate())
+	//cmd.SetHelpCommand(helpCommand())
+	//cmd.SetFlagErrorFunc(FlagErrorFunc)
 
 	cmd.PersistentFlags().BoolP("help", "h", false, "print usage")
 	cmd.PersistentFlags().MarkShorthandDeprecated("help", "please use --help")
