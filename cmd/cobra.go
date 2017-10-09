@@ -69,7 +69,7 @@ func FlagErrorFunc(cmd *cobra.Command, err error) error {
 
 func SetupRootCommand(cmd *cobra.Command) {
 	cmd.SetUsageTemplate(usageTemplate())
-	//cmd.SetHelpTemplate(helpTemplate())
+	cmd.SetHelpTemplate(helpTemplate())
 	cmd.SetHelpCommand(&cobra.Command{
 		Use:   "help [command]",
 		Short: "Help about the command",
@@ -89,8 +89,8 @@ func SetupRootCommand(cmd *cobra.Command) {
 			return nil
 		},
 	})
-	//cmd.SetFlagErrorFunc(FlagErrorFunc)
+	cmd.SetFlagErrorFunc(FlagErrorFunc)
 
-	//cmd.PersistentFlags().BoolP("help", "h", false, "print usage")
-	//cmd.PersistentFlags().MarkShorthandDeprecated("help", "please use --help")
+	cmd.PersistentFlags().BoolP("help", "h", false, "print usage")
+	cmd.PersistentFlags().MarkShorthandDeprecated("help", "please use --help")
 }
