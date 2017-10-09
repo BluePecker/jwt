@@ -5,7 +5,7 @@ import (
 )
 
 var RootCmd *cobra.Command = &cobra.Command{
-	Use:   "jwt [OPTIONS]",
+	Use:   "jwt",
 	Short: "A self-sufficient runtime for json-web-token auth",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return nil
