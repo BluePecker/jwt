@@ -10,7 +10,7 @@ var RootCmd *cobra.Command = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return nil
 	},
-	//SilenceUsage:  true,
+	SilenceUsage:  true,
 	SilenceErrors: true,
 }
 
