@@ -5,12 +5,12 @@ import (
 )
 
 var RootCmd *cobra.Command = &cobra.Command{
-	Use:   "jwt",
-	Long:  "User login information verification service",
-	Short: "Jwt auth server",
+	Use:   "jwt [OPTIONS]",
+	Short: "A self-sufficient runtime for json-web-token auth",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return nil
 	},
+	SilenceUsage:  true,
 	SilenceErrors: true,
 }
 
