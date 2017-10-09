@@ -6,8 +6,8 @@ import (
 
 var RootCmd *cobra.Command = &cobra.Command{
 	Use:   "jwt",
-	Short: "Jwt auth server",
 	Long:  "User login information verification service",
+	Short: "Jwt auth server",
 	RunE: func(cmd *cobra.Command, args []string) error {
 		return nil
 	},
